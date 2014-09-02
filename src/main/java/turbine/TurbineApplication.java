@@ -1,16 +1,14 @@
 package turbine;
 
+import com.netflix.turbine.discovery.InstanceDiscovery;
 import com.netflix.turbine.init.TurbineInit;
 import com.netflix.turbine.plugins.PluginsFactory;
 import com.netflix.turbine.streaming.servlet.TurbineStreamServlet;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.eureka.EurekaClientConfigBean;
-import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,16 +22,8 @@ import org.springframework.core.Ordered;
 @ComponentScan
 @EnableAutoConfiguration
 @EnableEurekaClient
-//@AutoConfigureAfter(EurekaClientConfiguration.class)
 public class TurbineApplication extends SpringBootServletInitializer implements SmartLifecycle, Ordered {
 
-    @Autowired
-    private DiscoveryClient discoveryClient;
-    @Autowired
-    private EurekaClientConfigBean clientConfig;
-
-    @Autowired
-    private EurekaInstanceConfigBean instanceConfig;
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(TurbineApplication.class).web(true);
