@@ -3,15 +3,19 @@ package turbine;
 import com.netflix.turbine.init.TurbineInit;
 import com.netflix.turbine.plugins.PluginsFactory;
 import com.netflix.turbine.streaming.servlet.TurbineStreamServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.eureka.EurekaClientConfigBean;
+import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.core.Ordered;
 
 /**
  * Created by sgibb on 7/11/14.
@@ -20,20 +24,33 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @ComponentScan
 @EnableAutoConfiguration
 @EnableEurekaClient
-public class Application extends SpringBootServletInitializer implements SmartLifecycle {
+//@AutoConfigureAfter(EurekaClientConfiguration.class)
+public class TurbineApplication extends SpringBootServletInitializer implements SmartLifecycle, Ordered {
 
+    @Autowired
+    private DiscoveryClient discoveryClient;
+    @Autowired
+    private EurekaClientConfigBean clientConfig;
+
+    @Autowired
+    private EurekaInstanceConfigBean instanceConfig;
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(Application.class).web(true);
+        return application.sources(TurbineApplication.class).web(true);
     }
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(Application.class).web(true).run(args);
+        new SpringApplicationBuilder(TurbineApplication.class).web(true).run(args);
     }
 
     @Bean
-    public ServletRegistrationBean mockStreamServlet() {
+    public ServletRegistrationBean turbineStreamServlet() {
         return new ServletRegistrationBean(new TurbineStreamServlet(), "/turbine.stream");
+    }
+
+    @Bean
+    public InstanceDiscovery instanceDiscovery() {
+        return new EurekaInstanceDiscovery();
     }
 
     private boolean running;
@@ -50,7 +67,10 @@ public class Application extends SpringBootServletInitializer implements SmartLi
 
     @Override
     public void start() {
+        //TODO: figure out ordering, so this is already run by EurekaClientConfiguration
+        //DiscoveryManager.getInstance().initComponent(instanceConfig, clientConfig);
         PluginsFactory.setClusterMonitorFactory(new SpringAggregatorFactory());
+        PluginsFactory.setInstanceDiscovery(instanceDiscovery());
         TurbineInit.init();
     }
 
@@ -67,5 +87,10 @@ public class Application extends SpringBootServletInitializer implements SmartLi
     @Override
     public int getPhase() {
         return 0;
+    }
+
+    @Override
+    public int getOrder() {
+        return -1;
     }
 }

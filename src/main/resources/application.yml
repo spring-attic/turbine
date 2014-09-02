@@ -1,5 +1,7 @@
 info:
   component: Turbine
+
+PREFIX:
   
 endpoints:
   restart:
@@ -9,41 +11,17 @@ endpoints:
 
 server:
   port: 8989
-  context-path: /turbine
 
 logging:
   level: INFO
 
 eureka:
-  client:
-    #Region where eureka is deployed -For AWS specify one of the AWS regions, for other datacenters specify a arbitrary string
-    #indicating the region.This is normally specified as a -D option (eg) -Deureka.region=us-east-1
-    region: default
-
-
-    #For eureka clients running in eureka server, it needs to connect to servers in other zones
-    preferSameZone: false
-
-    #Change this if you want to use a DNS based lookup for determining other eureka servers. For example
-    #of specifying the DNS entries, check the eureka-client-test.properties, eureka-client-prod.properties
-    #shouldUseDns: false
-
-    us-east-1:
-      availabilityZones: default
-
-    #serviceUrl:
-    #  default: http://localhost:8080/eureka/v2/
-    #  defaultZone: http://localhost:8080/eureka/v2/
-
   instance:
     #Virtual host name by which the clients identifies this service
     virtualHostName: ${spring.application.name}
 
-InstanceDiscovery:
-  impl: turbine.EurekaInstanceDiscovery
-
 turbine:
-  instanceUrlSuffix: hystrix.stream
-  instanceInsertPort: true
-#turbine.appConfig=samplefrontendservice --turbine.aggregator.clusterConfig=SAMPLEAPPS
+  aggregator:
+    clusterConfig: ${PREFIX}CUSTOMERS
+  appConfig: customers
 

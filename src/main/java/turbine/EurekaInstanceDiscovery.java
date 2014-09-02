@@ -31,7 +31,7 @@ public class EurekaInstanceDiscovery implements InstanceDiscovery {
 
     public EurekaInstanceDiscovery() {
         // Eureka client should already be configured by spring-platform-netflix-core
-        // initialize eureka client.  make sure eureka properties are properly configured in config.properties
+        // initialize eureka client.
         //DiscoveryManager.getInstance().initComponent(new MyDataCenterInstanceConfig(), new DefaultEurekaClientConfig());
     }
 
@@ -162,9 +162,10 @@ public class EurekaInstanceDiscovery implements InstanceDiscovery {
      * @return
      */
     protected String getClusterName(InstanceInfo iInfo) {
-        //TODO: make ASG configurable return iInfo.getASGName();
+        //TODO: make ASG configurable using app name for demo. //return iInfo.getASGName();
         //AppGroupName is UPPERCASE from eureka
-        return iInfo.getAppGroupName();
+        //return iInfo.getAppGroupName();
+        return iInfo.getAppName();
     }
 
     /**
