@@ -5,6 +5,7 @@
     <artifactId>turbine</artifactId>
     <packaging>jar</packaging>
     <name>Netflix Turbine</name>
+    <version>1.0.0.BUILD-SNAPSHOT</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
