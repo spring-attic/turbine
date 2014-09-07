@@ -22,6 +22,6 @@ eureka:
 
 turbine:
   aggregator:
-    clusterConfig: ${PREFIX}CUSTOMERS
+    clusterConfig: ${PREFIX:}CUSTOMERS
   appConfig: customers
 
