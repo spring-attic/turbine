@@ -17,8 +17,10 @@ logging:
 
 eureka:
   instance:
-    #Virtual host name by which the clients identifies this service
-    virtualHostName: ${spring.application.name}
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    serviceUrl:
+      defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:http://user:password@localhost:8761}/eureka/
 
 turbine:
   aggregator:

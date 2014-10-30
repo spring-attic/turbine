@@ -51,24 +51,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>
-        <dependency>
-        	<groupId>org.apache.httpcomponents</groupId>
-        	<artifactId>httpclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.netflix.turbine</groupId>
-            <artifactId>turbine-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-netflix-turbine</artifactId>
-            <version>1.0.0.BUILD-SNAPSHOT</version>
+            <artifactId>spring-cloud-starter-turbine</artifactId>
         </dependency>
     </dependencies>
 </project>
