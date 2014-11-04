@@ -5,7 +5,7 @@
     <artifactId>turbine</artifactId>
     <packaging>jar</packaging>
     <name>Netflix Turbine</name>
-    <version>1.0.0.BUILD-SNAPSHOT</version>
+    <version>1.0.0.M2</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -38,7 +38,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starters</artifactId>
-                <version>1.0.0.BUILD-SNAPSHOT</version>
+                <version>1.0.0.M2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
