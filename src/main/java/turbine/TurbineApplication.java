@@ -2,18 +2,20 @@ package turbine;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.netflix.turbine.EnableTurbine;
+import org.springframework.cloud.bus.turbine.StartBusTurbine;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
- * Created by sgibb on 7/11/14.
+ * @author Spencer Gibb
+ * @author Dave Syer
  */
 @Configuration
 @EnableAutoConfiguration
-@EnableTurbine
+@Import(StartBusTurbine.class)
 public class TurbineApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(TurbineApplication.class).web(true).run(args);
+        new SpringApplicationBuilder(TurbineApplication.class).web(false).run(args);
     }
 }
