@@ -9,8 +9,12 @@ endpoints:
   shutdown:
     enabled: true
 
+turbine:
+  amqp:
+    port: 8989
+
 server:
-  port: 8989
+  port: 8990
 
 logging:
   level: INFO
@@ -21,9 +25,4 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:http://user:password@localhost:8761}/eureka/
-
-turbine:
-  aggregator:
-    clusterConfig: ${PREFIX:}CUSTOMERS
-  appConfig: customers
 
