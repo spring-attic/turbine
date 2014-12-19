@@ -6,12 +6,12 @@
 	<artifactId>turbine</artifactId>
 	<packaging>jar</packaging>
 	<name>Spring Cloud Turbine</name>
-	<version>1.0.0.BUILD-SNAPSHOT</version>
+	<version>1.0.0.RC1</version>
 
 	<parent>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-parent</artifactId>
-		<version>1.0.0.BUILD-SNAPSHOT</version>
+		<version>1.0.0.RC1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -48,7 +48,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-parent</artifactId>
-				<version>1.0.0.BUILD-SNAPSHOT</version>
+				<version>1.0.0.RC1</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
