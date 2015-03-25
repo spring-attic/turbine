@@ -28,3 +28,8 @@ eureka:
     serviceUrl:
       defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:http://user:password@localhost:8761}/eureka/
 
+---
+spring:
+  profiles: cloud
+management:
+  port: -1
