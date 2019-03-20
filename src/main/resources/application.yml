@@ -27,7 +27,7 @@ eureka:
     non-secure-port: ${PORT:8989}
   client:
     serviceUrl:
-      defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:http://user:password@localhost:8761}/eureka/
+      defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:https://user:password@localhost:8761}/eureka/
 
 ---
 spring:
