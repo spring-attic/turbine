@@ -1,5 +1,6 @@
 package turbine;
 
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -18,7 +19,6 @@ import org.springframework.core.env.StandardEnvironment;
 public class TurbineApplication {
 
 	public static void main(String[] args) {
-		boolean cloudEnvironment = new StandardEnvironment().acceptsProfiles("cloud");
-		new SpringApplicationBuilder(TurbineApplication.class).web(!cloudEnvironment).run(args);
+		new SpringApplicationBuilder(TurbineApplication.class).web(WebApplicationType.NONE).run(args);
 	}
 }
